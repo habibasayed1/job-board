@@ -1,59 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# HireHub System
+<p> HireHub is a full-featured job posting and application platform designed to streamline the process of discovering, posting, managing, and applying for jobs.
+The system allows job seekers to browse available job listings, apply to positions, and manage their applications, while employers (company representatives) can create, edit, and delete job postings.<p/> 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## User Roles
+### 1. Guest (Unauthenticated User)
+ - Browse all job listings
+ - View individual job details
+ - Cannot apply to jobs (prompted to sign in or create account)
+### 2. Job Seeker (Authenticated User)
+ - Browse and view jobs.
+ - Apply to any job.
+ - View personal list of applied jobs ("My Applications").
+ - Access profile and logout.
 
-## About Laravel
+### 2. Employer / Company Representative 
+ - All Job Seeker capabilities.
+ - Create new job postings.
+ - View list of own posted jobs ("My Jobs").
+ - Edit or delete own job postings.
+ - No ability to view or manage incoming applications (current scope limitation).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key Features 
+- Job Browsing & Discovery: Any visitor can view job listings with details such as title, location, salary, company, experience level, category, and description.
+- Job Application Management: Registered job seekers can apply to jobs, view their application history, track applied positions, and delete any job application.
+- Employer Job Management: Registered users can designate themselves as company employees/representatives and post new jobs, edit existing ones, or delete them.
+- User Authentication & Roles: Secure sign-up, login, logout, and role-based access (job seeker vs. employer).
+-Administrative Tools: Employers have full control over their own job postings (create/edit/delete), but cannot directly accept/reject applicants (no built-in hiring decision workflow in current version).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Architecture Diagram
+![Job offers frrom specific page](https://github.com/user-attachments/assets/eefdb31a-19a9-4c9f-813e-8549fb88d071)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Database Schema
+<img width="870" height="940" alt="Blank diagram (3)" src="https://github.com/user-attachments/assets/4a882898-f11a-4c95-addb-41c0a9515254" />
 
-## Learning Laravel
+## Sequence diagram 1
+### Browse Jobs as a Guest
+<img width="1019" height="923" alt="Blank diagram (2)" src="https://github.com/user-attachments/assets/415a601b-9bd9-4250-95f4-3ee96e4bc1f0" />
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Sequence diagram 2
+### Apply to a Job
+<img width="1540" height="953" alt="Blank diagram (4)" src="https://github.com/user-attachments/assets/c28c22c0-24b7-41af-af94-d6000c51bb43" />
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## API Endpoints
+### Authentication 
+- `POST/api/register` - Register new user
+- `POST/api/login` - Login user and get JWT/token
+- `POST /api/logout` - Logout user
+  
+### Jobs (Public Browsing)
+- `GET/api/jobs` - Get list of all active jobs
+- `GET/api/jobs/{id}` - Get single job details
+  
+### Job Management (Employer Only)
+- `POST/api/jobs` - Create a new job posting
+- `GET/api/my-jobs` - Get list of jobs posted
+- `PATCH/api/jobs/{id}` - Update own job
+- `DELETE/api/jobs/{id}` - Delete job offer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Application
+- `POST/api/jobs/{id}/apply` - apply Apply to a job
+- `GET/api/my-applications` - Get list of jobs the user has applied to
 
-### Premium Partners
+### Employer Profile
+- `POST/api/employer` - Create or link employer profile (company) for the user`
+- `GET /api/employer/me` - Get current user's employer profile
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Screenshots
+### 1. Home Page 
+### 1.1 Home page
+![Home page](https://github.com/user-attachments/assets/33e5219a-8a0a-4fd0-8421-c007661e41a2)
+### 1.2 Home page
+![Home page 2](https://github.com/user-attachments/assets/e5386d62-7068-446e-aac3-f50deb4cb364)
 
-## Contributing
+## 2. Log in page
+![Login page](https://github.com/user-attachments/assets/a45318d2-7eff-495f-9457-55e803afc8bc)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 3. Applying for a job
+### 3.1. Warning to log in first
+![warning for logining in](https://github.com/user-attachments/assets/e0126bfc-4967-43f5-9b77-a88059a0a4bd)
 
-## Code of Conduct
+### 3.2. Applying for a job
+![Applyin for job 1](https://github.com/user-attachments/assets/a6af051c-5b07-4f5a-abab-5aafa348b0dc)
+### 3.3. Applying for a job
+![Applying for job 2](https://github.com/user-attachments/assets/5eab6ff5-fff8-4aee-affb-8a22a0c511cc)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3.4. Applying for a job
+![Successfully applied](https://github.com/user-attachments/assets/ebe08a9a-4842-4824-bcff-548da2f68bdd)
 
-## Security Vulnerabilities
+## 4. My Applications
+![Jobs I applied to](https://github.com/user-attachments/assets/78add386-012b-4fc3-8035-b260ba17189e)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 5. Job offers from specific company
+![Job offers frrom specific page](https://github.com/user-attachments/assets/abb2875a-0934-4975-ae55-640f6de4cc4b)
 
-## License
+## Create Job offers 
+### 6.1.Create Job offers 
+![Create job as an employer](https://github.com/user-attachments/assets/7eb63c0b-aa1d-4e16-8fc8-bbc9b673c921)
+### 6.2.Create Job offers 
+![Create job as an employer2](https://github.com/user-attachments/assets/fef9383b-59ba-4da4-9cb1-08fe2b4d8948)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
