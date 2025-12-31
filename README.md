@@ -28,8 +28,7 @@ The system allows job seekers to browse available job listings, apply to positio
 -Administrative Tools: Employers have full control over their own job postings (create/edit/delete), but cannot directly accept/reject applicants (no built-in hiring decision workflow in current version).
 
 ## Architecture Diagram
-![Uploading Gemini_Generated_Image_lhksuxlhksuxlhks.png…]()
-
+<img width="1472" height="704" alt="Architure diagram" src="https://github.com/user-attachments/assets/b410a8ed-9c79-4828-bde1-785bb435c045" />
 
 ## Database Schema
 <img width="870" height="940" alt="Blank diagram (3)" src="https://github.com/user-attachments/assets/4a882898-f11a-4c95-addb-41c0a9515254" />
